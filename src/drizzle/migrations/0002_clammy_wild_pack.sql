@@ -1,0 +1,2 @@
+ALTER TABLE "recipes" ADD COLUMN "published_date" timestamp with time zone;--> statement-breakpoint
+ALTER TABLE "recipes" ADD CONSTRAINT "publishConsistency" CHECK (("recipes"."is_published"=false AND "recipes"."published_date" IS NULL) OR ("recipes"."is_published"=true AND "recipes"."published_date" IS NOT NULL));
