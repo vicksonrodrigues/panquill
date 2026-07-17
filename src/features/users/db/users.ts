@@ -1,7 +1,7 @@
 import { db } from "@/drizzle/db";
 import { users } from "@/drizzle/schema";
 import { eq } from "drizzle-orm";
-import { cacheTag } from "next/cache";
+import {cacheTag}  from "next/cache";
 import { getUserIdTag, revalidateUserCache } from "./cache/users";
 
 export type UserTable = typeof users.$inferInsert;

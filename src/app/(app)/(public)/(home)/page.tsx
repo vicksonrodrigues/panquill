@@ -1,12 +1,11 @@
-import HeroSection from "./_components/HeroSection";
-import Recommendation from "./_components/Recommendation";
-import Trending from "./_components/Trending";
+import { HeroSection, Recommendation, Trending } from "@/features/dashboard";
 
 export default function Home() {
   return (
     <section className="relative">
       <div
         className="
+        rounded-xl
           pointer-events-none
           absolute inset-x-0 top-0
           h-[100vh]

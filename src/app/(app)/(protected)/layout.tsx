@@ -1,13 +1,13 @@
-import React from "react";
+import React from 'react'
 
 export default function ProtectedLayout({
-  children,
+    children,
 }: Readonly<{
-  children: React.ReactNode;
+    children: React.ReactNode
 }>) {
-  return (
-    <section>
-      <div className="@container/main">{children}</div>
-    </section>
-  );
+    return (
+        <section>
+            <div className="@container/main m-4">{children}</div>
+        </section>
+    )
 }

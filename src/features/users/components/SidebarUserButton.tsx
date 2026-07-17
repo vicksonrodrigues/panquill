@@ -15,7 +15,6 @@ export function SidebarUserButton() {
 
 async function SidebarUserSuspense() {
   const { user } = await getCurrentUser({ allData: true });
-  console.log("User for database", user);
   if (user == null) {
     return (
       <SignOutButton>

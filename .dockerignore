@@ -1,0 +1,12 @@
+node_modules
+.clerk
+.next
+.git
+.gitignore
+.env
+.env.local
+README.md
+AGENTS.md
+file_structure.txt
+AGENTS.md
+file_structure.txt

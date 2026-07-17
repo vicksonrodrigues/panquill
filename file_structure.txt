@@ -1,0 +1,105 @@
+
+Project File Structure details
+
+
+.
+├── src/
+│   ├── app/                          # ROUTING LAYER
+│   │   ├── (auth)/                   # Clerk Authentication routes
+│   │   ├── (app)/                    # Main Application Group
+│   │   │   ├── (protected)/          # Auth-only (e.g., /recipes/create)
+│   │   │   └── (public)/             # Guest-accessible (e.g., /cookbook, /recipes/[id])
+│   │   └── api/
+│   │       ├── inngest/              # Inngest Server Endpoint
+│   │       └── recipes               # All recipe form data fetch(for client component only)
+│   │
+│   ├── components/                   # GLOBAL UI LAYER
+│   │   ├── ui/                     # Basic Shadcn components
+│   │   ├── shared/                 # Carousel, Select, Pagination
+│   │   ├── layout/                 # Sidebar, Header
+│   │   └── providers/              # ThemeProvider
+│   │
+│   ├── drizzle/                      # GLOBAL DATABASE DEFINITIONS
+│   │   ├── schema/
+│   │   │   ├── core/
+│   │   │   │   ├── recipes.ts            # Main recipe tables
+│   │   │   │   └── users.ts              # User profiles
+│   │   │   ├── junction/
+│   │   │   │   ├── favourite-recipes.ts  # User ↔ Recipe favorites
+│   │   │   │   ├── recipe-ingredients.ts # Recipe ↔ Ingredient join
+│   │   │   │   ├── recipe-tags.ts        # Recipe ↔ Tag join
+│   │   │   │   └── recipe-tools.ts       # Recipe ↔ Tool join
+│   │   │   └── lookup/
+│   │   │       ├── courses.ts            # Lookup: courses
+│   │   │       ├── cuisines.ts           # Lookup: cuisines
+│   │   │       ├── ingredients.ts        # Lookup: ingredients
+│   │   │       ├── tags.ts               # Lookup: tags
+│   │   │       └── tools.ts              # Lookup: tools
+│   │   ├── db.ts                         # Drizzle client & Neon connection
+│   │   ├── schema.ts                     # Main schema entry point
+│   │   └── schemaHelpers.ts              # Shared schema utilities/helpers
+│   │
+│   ├── features/                     # MODULAR BUSINESS LOGIC
+│   │   ├── recipes/
+│   │   │   ├── actions/              # SERVER ACTIONS- All server related function (backend like) (The "Middleman")
+│   │   │   │   └── index.ts          # Auth check -> Validation -> DB -> Revalidate
+│   │   │   ├── db/                   # DATA ACCESS LAYER (Feature-specific)
+│   │   │   │   ├── cache/            # Next.js 'unstable_cache' wrappers
+│   │   │   │   ├── queries.ts        # RAW GET: getRecipe, listRecipes
+│   │   │   │   └── mutations.ts      # RAW WRITE: insertRecipe, deleteRecipe
+│   │   │   ├── components/           # UI COMPONENTS
+│   │   │   │   ├── search/           # Search input + Filter logic
+│   │   │   │   ├── cards/            # RecipeCard, RecipeSkeleton
+│   │   │   │   ├── editor/           # THE "WRITE" SIDE
+│   │   │   │   │   ├── sections/     # Shared form fields (IngredientsInput)
+│   │   │   │   │   └── recipe-editor-tab.tsx
+│   │   │   │   ├── preview/          # THE "READ" SIDE (Used in Tabs & Public Page)
+│   │   │   │   │   ├── ui/           # High-fidelity display (IngredientList)
+│   │   │   │   │   ├── recipe-preview-tab.tsx
+│   │   │   │   │   └── recipe-full-view.tsx
+│   │   │   │   └── recipe-tabs-container.tsx # THE PARENT (useForm + Tabs)
+│   │   │   ├── hooks/                # useRecipeForm, useScaling logic
+│   │   │   ├── types.ts              # TS Interfaces (Course, Recipe, FormValues)
+│   │   │   ├── validation.ts         # Zod schemas (handling .nullable() selects)
+│   │   │   └── index.ts              # Public API for the feature (a barrel for all the export)
+│   │   │   
+│   │   ├── dashboard/                # FEATURE: Discovery
+│   │   │   ├── components/           # Hero, Recommendation, Trending
+│   │   │   └── index.ts
+│   │   │
+│   │   ├── user-recipes/             # FEATURE: User Collections
+│   │   │   ├── db/                   # Queries for favorites/owned
+│   │   │   ├── components/           # Grid layouts for "My" pages
+│   │   │   └── index.ts
+│   │   │
+│   │   ├── users/                    # FEATURE: User related features
+│   │   │
+│   │   └── cookbook/                 # FEATURE: Browsing
+│   │       ├── components/           # CookbookView (Search + List)
+│   │       └── index.ts
+│   │
+│   ├── services/                     # INFRASTRUCTURE ADAPTERS
+│   │   ├── clerk/  
+│   │   │   ├── components/           # Clerk UI Components
+│   │   │   │   ├── AuthButtons.tsx       # Sign in/out buttons
+│   │   │   │   ├── ClerkProvider.tsx     # Clerk context provider
+│   │   │   │   └── SignInStatus.tsx      # Auth state display
+│   │   │   └── libs/
+│   │   │       └── getCurrentAuth.ts     # Server-side auth helper
+│   │   │
+│   │   └── inngest/                  # Inngest Client & Background Functions
+│   │       ├── functions/
+│   │       │   └── clerk.ts              # Clerk-triggered background jobs
+│   │       └── client.ts                 # Inngest client instance
+│   │
+│   ├── lib/                          # SHARED UTILITIES (cn helper)
+│   ├── hooks/                        # Custom React hooks
+│   ├── types/                        # Global TypeScript definitions
+│   ├── data/                         # Data and environment configuration
+│   └── proxy.ts                      # Clerk Protected Route Rules
+│
+├── drizzle.config.ts                 # Drizzle Kit CLI Config
+├── next.config.ts
+├── eslint.config.mjs
+├── postcss.config.mjs
+└── components.json

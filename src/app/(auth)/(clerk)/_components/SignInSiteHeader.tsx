@@ -1,4 +1,4 @@
-import { ModeToggle } from "@/components/dark-mode-toggle";
+import { ModeToggle } from "@/components/shared/dark-mode-toggle";
 import Image from "next/image";
 import React from "react";
 

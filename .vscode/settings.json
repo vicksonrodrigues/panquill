@@ -1,3 +1,5 @@
 {
-    "typescript.tsdk": "node_modules\\typescript\\lib"
+    "typescript.tsdk": "node_modules\\typescript\\lib",
+    "chat.utilityModel": "customendpoint/qwen3.5-4b",
+    "chat.utilitySmallModel": "customendpoint/qwen3.5-4b"
 }

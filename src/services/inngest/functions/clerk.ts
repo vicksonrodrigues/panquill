@@ -1,7 +1,6 @@
 import { NonRetriableError } from "inngest";
 import { inngest } from "../client";
-/* import { env } from "@/data/env/server";
-import { Webhook } from "svix"; */
+/* import { env } from "@/data/env/server";*/
 import { deleteUser, insertUser, updateUser } from "@/features/users/db/users";
 
 export const clerkCreateUser = inngest.createFunction(

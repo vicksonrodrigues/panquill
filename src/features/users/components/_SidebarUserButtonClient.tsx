@@ -4,6 +4,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
@@ -23,14 +24,16 @@ export function SidebarUserButtonClient({ user }: { user: UserTable }) {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <SidebarMenuButton
-          size="lg"
-          className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground p-1"
-        >
-          <UserInfo {...user} />
-          <ChevronsUpDown className="ml-auto group-data-[state=collapsed]:hidden" />
-        </SidebarMenuButton>
+      <DropdownMenuTrigger
+        render={
+          <SidebarMenuButton
+            size="lg"
+            className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground p-1"
+          />
+        }
+      >
+        <UserInfo {...user} />
+        <ChevronsUpDown className="ml-auto group-data-[state=collapsed]:hidden" />
       </DropdownMenuTrigger>
       <DropdownMenuContent
         sideOffset={4}
@@ -38,19 +41,23 @@ export function SidebarUserButtonClient({ user }: { user: UserTable }) {
         side={isMobile ? "bottom" : "right"}
         className="min-w-64 max-w-80"
       >
-        <DropdownMenuLabel className="font-normal p-1">
-          <UserInfo {...user} />
-        </DropdownMenuLabel>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem
-          onClick={() => {
-            openUserProfile();
-            setOpenMobile(false);
-          }}
-        >
-          <UserIcon className="mr-1" /> Profile
-        </DropdownMenuItem>
-        <DropdownMenuSeparator />
+        <DropdownMenuGroup>
+          <DropdownMenuLabel className="font-normal p-1">
+            <UserInfo {...user} />
+          </DropdownMenuLabel>
+          <DropdownMenuSeparator />
+        </DropdownMenuGroup>
+        <DropdownMenuGroup>
+          <DropdownMenuItem
+            onClick={() => {
+              openUserProfile();
+              setOpenMobile(false);
+            }}
+          >
+            <UserIcon className="mr-1" /> Profile
+          </DropdownMenuItem>
+          <DropdownMenuSeparator />
+        </DropdownMenuGroup>
         <SignOutButton>
           <DropdownMenuItem>
             <LogOutIcon className="mr-1" /> Log Out

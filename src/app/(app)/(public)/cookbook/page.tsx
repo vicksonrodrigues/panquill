@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import React from "react";
-import CookBookSearch from "./_components/CookBookSearch";
-import RecipeList from "./_components/RecipeList";
+import { SearchBar } from "@/features/recipes";
+import { RecipeList } from "@/features/cookbook";
 export const metadata: Metadata = {
   title: "Cookbook",
 };
@@ -21,7 +21,7 @@ export default function CookbookPage() {
               recipes for every occasion and skill level.
             </p>
           </div>
-          <CookBookSearch />
+          <SearchBar />
           <RecipeList />
         </div>
       </div>
