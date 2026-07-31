@@ -5,6 +5,6 @@ export async function GET(req: NextRequest) {
     const search = req.nextUrl.searchParams.get('search') || ''
     const data = await findCourses(search)
     return NextResponse.json(
-        data.map((c) => ({ id: c.id, value: c.normalizedName, label: c.name }))
+        data.map((c) => ({ id: c.id, value: c.value, label: c.label }))
     )
 }

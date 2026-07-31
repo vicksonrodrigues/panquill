@@ -15,10 +15,10 @@ import { SignOutButton } from "@/services/clerk/components/AuthButtons";
 import { useClerk } from "@clerk/nextjs";
 import { BadgeCheck, ChevronsUpDown, LogOutIcon, UserIcon } from "lucide-react";
 
-import { UserTable } from "../db/users";
 import { Badge } from "@/components/ui/badge";
+import { User } from "../../../../prisma/generated/prisma/client";
 
-export function SidebarUserButtonClient({ user }: { user: UserTable }) {
+export function SidebarUserButtonClient({ user }: { user: User }) {
   const { isMobile, setOpenMobile } = useSidebar();
   const { openUserProfile } = useClerk();
 
@@ -74,7 +74,7 @@ function UserInfo({
   firstName,
   lastName,
   isAdmin,
-}: UserTable) {
+}: User) {
   const fullName = firstName.concat(" ", lastName ?? " ").trim();
   const nameInitials = fullName
     .split(" ")

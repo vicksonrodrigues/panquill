@@ -7,19 +7,16 @@ export const env = createEnv({
         DB_USER: z.string().min(1),
         DB_PASSWORD: z.string().min(1),
         DB_HOST: z.string().min(1),
-        DIRECT_DB_HOST: z.string().min(1),
+        DB_PORT: z.string().default('5432'),
         DB_NAME: z.string().min(1),
     },
     createFinalSchema: (shape) =>
         z.object(shape).transform((env) => {
-            const pooled = `postgresql://${env.DB_USER}:${env.DB_PASSWORD}@${env.DB_HOST}/${env.DB_NAME}?sslmode=verify-full`
-
-            const direct = `postgresql://${env.DB_USER}:${env.DB_PASSWORD}@${env.DIRECT_DB_HOST}/${env.DB_NAME}?sslmode=verify-full`
+            const url = `postgresql://${env.DB_USER}:${env.DB_PASSWORD}@${env.DB_HOST}:${env.DB_PORT}/${env.DB_NAME}`
 
             return {
                 ...env,
-                DATABASE_URL: pooled,
-                DIRECT_DATABASE_URL: direct,
+                DATABASE_URL: url,
             }
         }),
     runtimeEnv: process.env,

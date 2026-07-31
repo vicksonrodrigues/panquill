@@ -6,6 +6,6 @@ export async function GET(req: NextRequest) {
     const data = await findIngredients(search)
 
     return NextResponse.json(
-        data.map((c) => ({ id: c.id, value: c.normalizedName, label: c.name }))
+        data.map((c) => ({ id: c.id, value: c.value, label: c.label }))
     )
 }

@@ -18,8 +18,8 @@ export async function GET(req: NextRequest) {
         return NextResponse.json(
             data.map((c) => ({
                 id: c.id,
-                value: c.normalizedName,
-                label: c.name,
+                value: c.value,
+                label: c.label,
             }))
         )
     } catch (error) {

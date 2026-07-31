@@ -1,89 +1,115 @@
-import { NonRetriableError } from "inngest";
-import { inngest } from "../client";
+import { eventType, NonRetriableError, staticSchema } from 'inngest'
+import { inngest } from '../client'
 /* import { env } from "@/data/env/server";*/
-import { deleteUser, insertUser, updateUser } from "@/features/users/db/users";
+import {
+    deleteUser,
+    insertUser,
+    updateUser,
+} from '@/features/users/db/mutations'
+
+import { DeletedObjectJSON, UserJSON } from '@clerk/nextjs/server'
+import { ClerkWebhookData } from './types';
+
+
+const createUserEvent = eventType("clerk/user.created", {
+    schema: staticSchema<ClerkWebhookData<UserJSON>>(),
+});
+
+const updateUserEvent = eventType("clerk/user.updated", {
+    schema: staticSchema<ClerkWebhookData<UserJSON>>(),
+});
+
+const deleteUserEvent = eventType("clerk/user.deleted", {
+    schema: staticSchema<ClerkWebhookData<DeletedObjectJSON>>(),
+});
 
 export const clerkCreateUser = inngest.createFunction(
-  { id: "clerk/create-db-user", name: "Clerk - Create DB User" },
-  {
-    event: "clerk/user.created",
-  },
-  async ({ event, step }) => {
-    await step.run("create-user", async () => {
-      const userData = event.data.data;
-      const email = userData.email_addresses.find(
-        (email) => email.id === userData.primary_email_address_id,
-      );
+    {
+        id: 'clerk/create-db-user',
+        name: 'Clerk - Create DB User',
+        triggers: [createUserEvent],
+    },
 
-      if (email == null) {
-        throw new NonRetriableError("No primary email address found");
-      }
+    async ({ event, step }) => {
+        await step.run('create-user', async () => {
+            const userData = event.data.data
+            const email = userData.email_addresses.find(
+                (email) => email.id === userData.primary_email_address_id
+            )
 
-      if (userData.first_name == null) {
-        throw new NonRetriableError("No first name found");
-      }
+            if (email == null) {
+                throw new NonRetriableError('No primary email address found')
+            }
 
-      await insertUser({
-        id: userData.id,
-        firstName: userData.first_name,
-        lastName: userData.last_name,
-        profileImageUrl: userData.image_url,
-        email: email.email_address,
-        createdAt: new Date(userData.created_at),
-        updatedAt: new Date(userData.updated_at),
-        isAdmin: false,
-      });
+            if (userData.first_name == null) {
+                throw new NonRetriableError('No first name found')
+            }
 
-      return userData.id;
-    });
-  },
-);
+            await insertUser({
+                id: userData.id,
+                firstName: userData.first_name,
+                lastName: userData.last_name || '',
+                profileImageUrl: userData.image_url,
+                email: email.email_address,
+                createdAt: new Date(userData.created_at),
+                updatedAt: new Date(userData.updated_at),
+                isAdmin: false,
+            })
+
+            return userData.id
+        })
+    }
+)
 
 export const clerkUpdateUser = inngest.createFunction(
-  { id: "clerk/update-db-user", name: "Clerk - Update DB User" },
-  {
-    event: "clerk/user.updated",
-  },
-  async ({ event, step }) => {
-    await step.run("update-user", async () => {
-      const userData = event.data.data;
-      const email = userData.email_addresses.find(
-        (email) => email.id === userData.primary_email_address_id,
-      );
+    {
+        id: 'clerk/update-db-user',
+        name: 'Clerk - Update DB User',
+        triggers: [updateUserEvent],
+    },
 
-      if (email == null) {
-        throw new NonRetriableError("No primary email address found");
-      }
+    async ({ event, step }) => {
+        await step.run('update-user', async () => {
+            const userData = event.data.data
+            const email = userData.email_addresses.find(
+                (email) => email.id === userData.primary_email_address_id
+            )
 
-      if (userData.first_name == null) {
-        throw new NonRetriableError("No first name found");
-      }
+            if (email == null) {
+                throw new NonRetriableError('No primary email address found')
+            }
 
-      await updateUser(userData.id, {
-        firstName: userData.first_name,
-        lastName: userData.last_name,
-        profileImageUrl: userData.image_url,
-        email: email.email_address,
-        updatedAt: new Date(userData.updated_at),
-      });
-    });
-  },
-);
+            if (userData.first_name == null) {
+                throw new NonRetriableError('No first name found')
+            }
+
+            await updateUser(userData.id, {
+                firstName: userData.first_name,
+                lastName: userData.last_name || '',
+                profileImageUrl: userData.image_url,
+                email: email.email_address,
+                updatedAt: new Date(userData.updated_at),
+            })
+        })
+    }
+)
 
 export const clerkDeleteUser = inngest.createFunction(
-  { id: "clerk/delete-db-user", name: "Clerk - Delete DB User" },
-  {
-    event: "clerk/user.deleted",
-  },
-  async ({ event, step }) => {
-    await step.run("delete-user", async () => {
-      const { id } = event.data.data;
+    {
+        id: 'clerk/delete-db-user',
+        name: 'Clerk - Delete DB User',
+        triggers: [deleteUserEvent],
+    },
 
-      if (id == null) {
-        throw new NonRetriableError("No id found");
-      }
+    async ({ event, step }) => {
+        await step.run('delete-user', async () => {
+            const { id } = event.data.data
 
-      await deleteUser(id);
-    });
-  },
-);
+            if (id == null) {
+                throw new NonRetriableError('No id found')
+            }
+
+            await deleteUser(id)
+        })
+    }
+)

@@ -1,11 +1,9 @@
-import { db } from '@/drizzle/db'
-import { recipes } from '@/drizzle/schema'
-import { ilike } from 'drizzle-orm'
+import { prisma } from '@/prisma/db'
 
 export async function findRecipes(search: string) {
-    const allRecipeData = await db
-        .select()
-        .from(recipes)
-        .where(search ? ilike(recipes.title, `%${search}%`) : undefined)
-    return allRecipeData
+    return prisma.recipe.findMany({
+        where: search
+            ? { title: { contains: search, mode: 'insensitive' } }
+            : undefined,
+    })
 }

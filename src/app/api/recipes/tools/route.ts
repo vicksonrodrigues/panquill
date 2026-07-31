@@ -8,8 +8,8 @@ export async function GET(req: NextRequest) {
     return NextResponse.json(
         data.items.map((c) => ({
             id: c.id,
-            value: c.normalizedName,
-            label: c.name,
+            value: c.value,
+            label: c.label,
         }))
     )
 }

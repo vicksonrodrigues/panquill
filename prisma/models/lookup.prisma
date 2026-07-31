@@ -1,0 +1,54 @@
+model Course {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  label     String
+  value     String   @unique //normalizedValue
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
+  recipes   Recipe[]
+
+  @@map("courses")
+}
+
+model Cuisine {
+  id        String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  label     String
+  value     String          @unique //normalizedValue
+  createdAt DateTime        @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt DateTime        @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
+  recipes   RecipeCuisine[]
+
+  @@map("cuisines")
+}
+
+model Ingredient {
+  id        String             @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  label     String
+  value     String             @unique //normalizedValue
+  createdAt DateTime           @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt DateTime           @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
+  recipes   RecipeIngredient[]
+
+  @@map("ingredients")
+}
+
+model Tag {
+  id        String      @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  label     String
+  value     String      @unique //normalizedValue
+  createdAt DateTime    @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt DateTime    @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
+  recipes   RecipeTag[]
+
+  @@map("tags")
+}
+
+model Tool {
+  id        String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  label     String
+  value     String       @unique //normalizedValue
+  createdAt DateTime     @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt DateTime     @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
+  recipes   RecipeTool[]
+
+  @@map("tools")
+}

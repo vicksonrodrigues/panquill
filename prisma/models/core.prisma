@@ -1,0 +1,48 @@
+model User {
+  id               String            @id
+  firstName        String            @map("first_name")
+  lastName         String?           @map("last_name")
+  email            String            @unique
+  profileImageUrl  String?           @map("profile_image_url")
+  isAdmin          Boolean           @default(false) @map("is_admin")
+  createdAt        DateTime          @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt        DateTime          @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
+  recipes          Recipe[]
+  favouriteRecipes FavouriteRecipe[]
+  recipeRatings    RecipeRating[]
+
+  @@map("users")
+}
+
+model Recipe {
+  id            String             @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title         String
+  description   String
+  imageUrl      String?            @map("image_url")
+  prepTime      Int?               @map("prep_time") @db.SmallInt
+  cookTime      Int?               @map("cook_time") @db.SmallInt
+  passiveTime   Int?               @map("passive_time") @db.SmallInt
+  servings      Int?               @db.SmallInt
+  viewCount     Int?               @default(0) @map("view_count")
+  steps         String[]
+  tips          String[]
+  isAdminRecipe Boolean?           @default(false) @map("is_admin_recipe")
+  isPublished   Boolean?           @default(false) @map("is_published")
+  publishedDate DateTime?          @map("published_date") @db.Timestamptz
+  createdAt     DateTime           @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt     DateTime           @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
+  //Relations 1-m
+  authorId      String             @map("author_id")
+  author        User               @relation(fields: [authorId], references: [id])
+  courseId      String             @map("course_id") @db.Uuid
+  course        Course             @relation(fields: [courseId], references: [id])
+  //Reations m-n
+  favourites    FavouriteRecipe[]
+  ratings       RecipeRating[]
+  tags          RecipeTag[]
+  cuisines      RecipeCuisine[]
+  tools         RecipeTool[]
+  ingredients   RecipeIngredient[]
+
+  @@map("recipes")
+}

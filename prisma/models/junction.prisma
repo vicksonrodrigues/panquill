@@ -1,0 +1,78 @@
+model FavouriteRecipe {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz
+  //Relation
+  userId    String   @map("user_id")
+  user      User     @relation(fields: [userId], references: [id])
+  recipeId  String   @map("recipe_id") @db.Uuid
+  recipe    Recipe   @relation(fields: [recipeId], references: [id])
+
+  @@unique([userId, recipeId])
+  @@map("favourite_recipes")
+}
+
+model RecipeCuisine {
+  id        String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  //Relation
+  recipeId  String  @map("recipe_id") @db.Uuid
+  recipe    Recipe  @relation(fields: [recipeId], references: [id])
+  cuisineId String  @map("cuisine_id") @db.Uuid
+  cuisine   Cuisine @relation(fields: [cuisineId], references: [id])
+
+  @@unique([recipeId, cuisineId])
+  @@map("recipe_cuisines")
+}
+
+model RecipeIngredient {
+  id           String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  quantity     String
+  createdAt    DateTime   @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt    DateTime   @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
+  //Relation
+  recipeId     String     @map("recipe_id") @db.Uuid
+  recipe       Recipe     @relation(fields: [recipeId], references: [id])
+  ingredientId String     @map("ingredient_id") @db.Uuid
+  ingredient   Ingredient @relation(fields: [ingredientId], references: [id])
+
+  @@unique([recipeId, ingredientId])
+  @@map("recipe_ingredients")
+}
+
+model RecipeRating {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  rating    Int      @db.SmallInt
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
+  //Relation
+  userId    String   @map("user_id")
+  user      User     @relation(fields: [userId], references: [id])
+  recipeId  String   @map("recipe_id") @db.Uuid
+  recipe    Recipe   @relation(fields: [recipeId], references: [id])
+
+  @@unique([recipeId, userId])
+  @@map("recipe_ratings")
+}
+
+model RecipeTag {
+  id       String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  //Relation
+  recipeId String @map("recipe_id") @db.Uuid
+  recipe   Recipe @relation(fields: [recipeId], references: [id])
+  tagId    String @map("tag_id") @db.Uuid
+  tag      Tag    @relation(fields: [tagId], references: [id])
+
+  @@unique([recipeId, tagId])
+  @@map("recipe_tags")
+}
+
+model RecipeTool {
+  id       String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  //Relation
+  recipeId String @map("recipe_id") @db.Uuid
+  recipe   Recipe @relation(fields: [recipeId], references: [id])
+  toolId   String @map("tool_id") @db.Uuid
+  tool     Tool   @relation(fields: [toolId], references: [id])
+
+  @@unique([recipeId, toolId])
+  @@map("recipe_tools")
+}
