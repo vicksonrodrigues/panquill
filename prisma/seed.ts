@@ -10,6 +10,9 @@ import { PrismaPg } from '@prisma/adapter-pg'
 const DATABASE_URL = process.env.DATABASE_URL
 if (!DATABASE_URL) throw new Error('DATABASE_URL is not set in environment.')
 
+console.log('DATABASE_URL first 30 chars:', DATABASE_URL.slice(0, 30))
+console.log('DATABASE_URL length:', DATABASE_URL.length)
+
 const adapter = new PrismaPg({ connectionString: DATABASE_URL })
 const prisma = new PrismaClient({ adapter })
 
@@ -592,7 +595,12 @@ const RECIPES: RecipeSeed[] = [
             { value: 'black-pepper', quantity: '1 tsp' },
         ],
         tagValues: ['spicy', 'high-protein', 'comfort-food'],
-        toolValues: ['pressure-cooker', 'frying-pan', 'saucepan', 'chefs-knife'],
+        toolValues: [
+            'pressure-cooker',
+            'frying-pan',
+            'saucepan',
+            'chefs-knife',
+        ],
     },
 
     // -----------------------------------------------------------------------
@@ -679,7 +687,12 @@ const RECIPES: RecipeSeed[] = [
             { value: 'butter', quantity: '30g melted' },
             { value: 'salt', quantity: 'a pinch' },
         ],
-        tagValues: ['vegetarian', 'kid-friendly', 'comfort-food', 'quick-and-easy'],
+        tagValues: [
+            'vegetarian',
+            'kid-friendly',
+            'comfort-food',
+            'quick-and-easy',
+        ],
         toolValues: ['frying-pan', 'mixing-bowl', 'whisk', 'spatula'],
     },
 
@@ -890,11 +903,9 @@ async function main() {
 
     // --- Recipes ---
     console.log('\n  Seeding Recipes...')
+    console.log(`     WARNING: Using authorId "${PLACEHOLDER_AUTHOR_ID}".`)
     console.log(
-        `     WARNING: Using authorId "${PLACEHOLDER_AUTHOR_ID}".`,
-    )
-    console.log(
-        '     Replace PLACEHOLDER_AUTHOR_ID at the top of seed.ts with a real Clerk user ID.\n',
+        '     Replace PLACEHOLDER_AUTHOR_ID at the top of seed.ts with a real Clerk user ID.\n'
     )
 
     let recipeCount = 0
@@ -902,7 +913,9 @@ async function main() {
     for (const r of RECIPES) {
         const courseId = createdCourses[r.courseValue]
         if (!courseId) {
-            console.warn(`     SKIP: Unknown course "${r.courseValue}" for recipe "${r.title}"`)
+            console.warn(
+                `     SKIP: Unknown course "${r.courseValue}" for recipe "${r.title}"`
+            )
             continue
         }
 
