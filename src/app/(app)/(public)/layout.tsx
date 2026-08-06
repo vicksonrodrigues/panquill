@@ -5,5 +5,5 @@ export default function PublicLayout({
 }: Readonly<{
     children: React.ReactNode
 }>) {
-    return <section className="@container/main m-4">{children}</section>
+    return <section className="@container/main mx-4">{children}</section>
 }
