@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "recipes" ALTER COLUMN "hot_score" SET DEFAULT 0,
+ALTER COLUMN "hot_score" SET DATA TYPE DOUBLE PRECISION;

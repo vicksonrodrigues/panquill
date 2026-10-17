@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 
 import { Card, CardContent } from '@/components/ui/card'
@@ -13,7 +14,7 @@ import RecipeDescription from './ui/RecipeDescription'
 import StatCard from './ui/StatCard'
 import { Separator } from '@/components/ui/separator'
 import IngredientList from './ui/IngredientList'
-import { RecipeImagePreview } from './ui/ImagePlaceholder'
+import { RecipeImage } from './ui/RecipeImage'
 import StepsList from './ui/StepsList'
 import TipsList from './ui/TipsList'
 import ToolsList from './ui/ToolsList'
@@ -75,27 +76,21 @@ export default function RecipePreviewTab() {
                 <div className="space-y-2 p-4">
                     <RecipeTitle title={title} />
                     <div className="flex flex-col gap-2 pt-1">
+                        <MetaRow type="Course" value={course?.label} />
                         <MetaRow
-                            label="Course"
-                            value={course?.label}
-                            emptyText="No Course Selected"
-                        />
-                        <MetaRow
-                            label="Cuisine"
+                            type="Cuisine"
                             values={cuisine?.map((c: any) => c.label)}
-                            emptyText="No Cuisine Selected"
                         />
                         <MetaRow
-                            label="Tags"
+                            type="Tag"
                             values={tags?.map((t: any) => t.label)}
-                            emptyText="No Tag Selected"
                         />
                     </div>
                 </div>
 
                 <Separator />
 
-                <RecipeImagePreview src={imgPreviewUrl?.base64String} />
+                <RecipeImage src={imgPreviewUrl?.base64String} />
 
                 <div className="space-y-4 p-4">
                     <SectionWrapper title="Description">

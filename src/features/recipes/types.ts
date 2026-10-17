@@ -1,3 +1,5 @@
+import { Prisma } from '../../../prisma/generated/prisma/client'
+
 interface SelectOptionType {
     id: string
     label: string
@@ -60,3 +62,29 @@ export interface RecipeCardData {
 export type KeysMatching<T, V> = {
     [K in keyof T]: T[K] extends V ? K : never
 }[keyof T]
+
+export const recipeWithDetailsInclude = {
+    author: true,
+    course: true,
+    recipeCuisines: { include: { cuisine: true } },
+    recipeTags: { include: { tag: true } },
+    recipeTools: { include: { tool: true } },
+    recipeIngredients: { include: { ingredient: true } },
+    recipeRatings: true,
+} satisfies Prisma.RecipeInclude
+
+// Schema-derived shape. Stays in sync automatically when the Prisma schema changes.
+type RecipeWithDetails = Prisma.RecipeGetPayload<{
+    include: typeof recipeWithDetailsInclude
+}>
+
+// Fields that aren't columns/relations — computed in your data layer, not by Prisma.
+interface DerivedRecipeMetrics {
+    favouriteCount: number
+    averageRating: number
+    ratingCount: number
+    isFavouritedByCurrentUser: boolean
+    currentUserRating: number | null
+}
+
+export type FullRecipeView = RecipeWithDetails & DerivedRecipeMetrics

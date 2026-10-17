@@ -1,5 +1,3 @@
-export { SearchBar } from "./components/search/SearchBar";
+export { RecipeCard } from './components/cards/RecipeCard'
 
-export { RecipeCard } from "./components/cards/RecipeCard";
-
-export { RecipeTabsContainer } from "./components/recipe-tabs-container";
+export { RecipeTabsContainer } from './components/recipe-tabs-container'

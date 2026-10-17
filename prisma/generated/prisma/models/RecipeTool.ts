@@ -210,8 +210,8 @@ export type RecipeToolScalarWhereWithAggregatesInput = {
 
 export type RecipeToolCreateInput = {
   id?: string
-  recipe: Prisma.RecipeCreateNestedOneWithoutToolsInput
-  tool: Prisma.ToolCreateNestedOneWithoutRecipesInput
+  recipe: Prisma.RecipeCreateNestedOneWithoutRecipeToolsInput
+  tool: Prisma.ToolCreateNestedOneWithoutRecipeToolsInput
 }
 
 export type RecipeToolUncheckedCreateInput = {
@@ -222,8 +222,8 @@ export type RecipeToolUncheckedCreateInput = {
 
 export type RecipeToolUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  recipe?: Prisma.RecipeUpdateOneRequiredWithoutToolsNestedInput
-  tool?: Prisma.ToolUpdateOneRequiredWithoutRecipesNestedInput
+  recipe?: Prisma.RecipeUpdateOneRequiredWithoutRecipeToolsNestedInput
+  tool?: Prisma.ToolUpdateOneRequiredWithoutRecipeToolsNestedInput
 }
 
 export type RecipeToolUncheckedUpdateInput = {
@@ -367,7 +367,7 @@ export type RecipeToolUncheckedUpdateManyWithoutToolNestedInput = {
 
 export type RecipeToolCreateWithoutRecipeInput = {
   id?: string
-  tool: Prisma.ToolCreateNestedOneWithoutRecipesInput
+  tool: Prisma.ToolCreateNestedOneWithoutRecipeToolsInput
 }
 
 export type RecipeToolUncheckedCreateWithoutRecipeInput = {
@@ -412,7 +412,7 @@ export type RecipeToolScalarWhereInput = {
 
 export type RecipeToolCreateWithoutToolInput = {
   id?: string
-  recipe: Prisma.RecipeCreateNestedOneWithoutToolsInput
+  recipe: Prisma.RecipeCreateNestedOneWithoutRecipeToolsInput
 }
 
 export type RecipeToolUncheckedCreateWithoutToolInput = {
@@ -453,7 +453,7 @@ export type RecipeToolCreateManyRecipeInput = {
 
 export type RecipeToolUpdateWithoutRecipeInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  tool?: Prisma.ToolUpdateOneRequiredWithoutRecipesNestedInput
+  tool?: Prisma.ToolUpdateOneRequiredWithoutRecipeToolsNestedInput
 }
 
 export type RecipeToolUncheckedUpdateWithoutRecipeInput = {
@@ -473,7 +473,7 @@ export type RecipeToolCreateManyToolInput = {
 
 export type RecipeToolUpdateWithoutToolInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  recipe?: Prisma.RecipeUpdateOneRequiredWithoutToolsNestedInput
+  recipe?: Prisma.RecipeUpdateOneRequiredWithoutRecipeToolsNestedInput
 }
 
 export type RecipeToolUncheckedUpdateWithoutToolInput = {

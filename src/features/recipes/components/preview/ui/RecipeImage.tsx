@@ -9,14 +9,14 @@ type ImagePlaceholderProps = {
     className?: string
 }
 
-export function RecipeImagePreview({ src, className }: ImagePlaceholderProps) {
+export function RecipeImage({ src, className }: ImagePlaceholderProps) {
     if (src) {
         return (
             <div className={cn('relative w-full overflow-hidden', className)}>
                 <img
                     src={src}
                     alt="RecipeImage"
-                    className="h-full w-full object-cover"
+                    className="h-full w-full object-contain"
                 />
             </div>
         )

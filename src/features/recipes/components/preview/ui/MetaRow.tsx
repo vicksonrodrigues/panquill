@@ -1,46 +1,36 @@
 import { Typography } from '@/components/shared/typography'
 import { Badge } from '@/components/ui/badge'
+import { ChefHat, Globe, LucideIcon, TagIcon } from 'lucide-react'
 import React from 'react'
 
+type MetaType = 'Course' | 'Cuisine' | 'Tag'
+
+const BadgeIcons: Record<MetaType, LucideIcon> = {
+    Course: ChefHat,
+    Cuisine: Globe,
+    Tag: TagIcon,
+}
 type MetaRowProps = {
-    label: string
+    type: MetaType
     value?: string
     values?: string[]
-    emptyText: string
 }
 
-export default function MetaRow({
-    label,
-    value,
-    values,
-    emptyText,
-}: MetaRowProps) {
+export default function MetaRow({ type, value, values }: MetaRowProps) {
     const items = values ?? (value ? [value] : [])
+    const MetaIcon = BadgeIcons[type]
     return (
-        <div className="flex items-center gap-2">
-            <Typography
-                variant={'label'}
-                className="w-14 shrink-0 pt-0.5 uppercase"
-            >
-                {label}
-            </Typography>
-            {items.length > 0 ? (
-                <div className="flex flex-wrap gap-1">
-                    {items.map((item, i) => (
-                        <Badge
-                            key={`${label}-badge-${i}`}
-                            className="bg-muted text-muted-foreground"
-                        >
-                            {item}
-                        </Badge>
-                    ))}
-                </div>
-            ) : (
-                <span className="text-muted-foreground/50 text-xs">
-                    {emptyText}
-                </span>
-            )}
-        </div>
+        <>
+            {items.map((item, i) => (
+                <Badge
+                    key={`${type}-badge-${i}`}
+                    className="bg-muted text-muted-foreground gap-2 p-3 text-sm"
+                >
+                    <MetaIcon className="size-3 shrink-0" />
+                    {item}
+                </Badge>
+            ))}
+        </>
     )
 }
 

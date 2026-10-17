@@ -4,7 +4,11 @@ import React from 'react'
 
 export default function RecipeDescription({ desc }: { desc: string }) {
     return desc ? (
-        <Typography as={'p'} variant={'body'}>
+        <Typography
+            as={'p'}
+            variant={'body'}
+            className="text-muted-foreground mt-2"
+        >
             {desc}
         </Typography>
     ) : (

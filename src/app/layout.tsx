@@ -3,6 +3,7 @@ import { Inter, Lora, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 import { ThemeProvider } from '@/components/providers/theme-provider'
 import { ClerkProvider } from '@/services/clerk/components/ClerkProvider'
+import { TooltipProvider } from '@/components/ui/tooltip'
 
 const fontSans = Inter({
     subsets: ['latin'],
@@ -44,7 +45,9 @@ export default function RootLayout({
                     enableSystem
                     disableTransitionOnChange
                 >
-                    <ClerkProvider>{children}</ClerkProvider>
+                    <ClerkProvider>
+                        <TooltipProvider>{children}</TooltipProvider>
+                    </ClerkProvider>
                 </ThemeProvider>
             </body>
         </html>

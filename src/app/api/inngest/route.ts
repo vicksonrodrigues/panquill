@@ -1,13 +1,25 @@
-import { inngest } from "@/services/inngest/client";
+import { inngest } from '@/services/inngest/client'
 import {
-  clerkCreateUser,
-  clerkDeleteUser,
-  clerkUpdateUser,
-} from "@/services/inngest/functions/clerk";
-import { serve } from "inngest/next";
+    clerkCreateUser,
+    clerkDeleteUser,
+    clerkUpdateUser,
+} from '@/services/inngest/functions/clerk'
+import {
+    computeHotScoresCron,
+    rotateEditorsChoiceCron,
+} from '@/services/inngest/functions/cronJobs'
+import { resyncSearchVectorsJob } from '@/services/inngest/functions/resync'
+import { serve } from 'inngest/next'
 
 // Create an API that serves zero functions
 export const { GET, POST, PUT } = serve({
-  client: inngest,
-  functions: [clerkCreateUser, clerkDeleteUser, clerkUpdateUser],
-});
+    client: inngest,
+    functions: [
+        clerkCreateUser,
+        clerkDeleteUser,
+        clerkUpdateUser,
+        computeHotScoresCron,
+        rotateEditorsChoiceCron,
+        resyncSearchVectorsJob,
+    ],
+})

@@ -425,7 +425,7 @@ const RECIPES: RecipeSeed[] = [
         description:
             'Ultra-fudgy, crinkle-topped brownies made with real dark chocolate and a touch of espresso powder to deepen the flavour. Impossible to eat just one.',
         imageUrl:
-            'https://images.unsplash.com/photo-1606312619070-d48b5c7a52ba?w=800&auto=format&fit=crop',
+            'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=800&auto=format&fit=crop',
         prepTime: 15,
         cookTime: 25,
         passiveTime: 60,
@@ -469,7 +469,7 @@ const RECIPES: RecipeSeed[] = [
         description:
             'Velvety spiced spinach gravy with golden paneer cubes -- a north Indian classic that is as nutritious as it is delicious.',
         imageUrl:
-            'https://images.unsplash.com/photo-1601050690597-df0568f70950?w=800&auto=format&fit=crop',
+            'https://images.unsplash.com/photo-1708782345205-94e1d1c54005?w=800&auto=format&fit=crop',
         prepTime: 15,
         cookTime: 20,
         passiveTime: null,
@@ -794,7 +794,7 @@ const RECIPES: RecipeSeed[] = [
         description:
             'Tender, deeply flavoured banana bread made with very ripe bananas, brown sugar, and a hint of cinnamon. Freezes beautifully.',
         imageUrl:
-            'https://images.unsplash.com/photo-1587324228077-8ed2a921bb1e?w=800&auto=format&fit=crop',
+            'https://images.unsplash.com/photo-1607958996333-41aef7caefaa?w=800&auto=format&fit=crop',
         prepTime: 10,
         cookTime: 55,
         passiveTime: 30,

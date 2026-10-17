@@ -6,7 +6,9 @@ export default function RecipeTitle({ title }: { title: string }) {
     return (
         <div>
             {title ? (
-                <Typography variant={'h2'}>{title}</Typography>
+                <Typography variant={'h1'} className="mb-4">
+                    {title}
+                </Typography>
             ) : (
                 <Skeleton className="h-6 w-3/5" />
             )}

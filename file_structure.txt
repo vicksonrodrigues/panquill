@@ -19,25 +19,8 @@ Project File Structure details
 │   │   ├── layout/                 # Sidebar, Header
 │   │   └── providers/              # ThemeProvider
 │   │
-│   ├── drizzle/                      # GLOBAL DATABASE DEFINITIONS
-│   │   ├── schema/
-│   │   │   ├── core/
-│   │   │   │   ├── recipes.ts            # Main recipe tables
-│   │   │   │   └── users.ts              # User profiles
-│   │   │   ├── junction/
-│   │   │   │   ├── favourite-recipes.ts  # User ↔ Recipe favorites
-│   │   │   │   ├── recipe-ingredients.ts # Recipe ↔ Ingredient join
-│   │   │   │   ├── recipe-tags.ts        # Recipe ↔ Tag join
-│   │   │   │   └── recipe-tools.ts       # Recipe ↔ Tool join
-│   │   │   └── lookup/
-│   │   │       ├── courses.ts            # Lookup: courses
-│   │   │       ├── cuisines.ts           # Lookup: cuisines
-│   │   │       ├── ingredients.ts        # Lookup: ingredients
-│   │   │       ├── tags.ts               # Lookup: tags
-│   │   │       └── tools.ts              # Lookup: tools
-│   │   ├── db.ts                         # Drizzle client & Neon connection
-│   │   ├── schema.ts                     # Main schema entry point
-│   │   └── schemaHelpers.ts              # Shared schema utilities/helpers
+│   ├── prisma/                       # PRISMA CLIENT INITIALIZATION
+│   │   └── db.ts                     # Prisma Client client setup
 │   │
 │   ├── features/                     # MODULAR BUSINESS LOGIC
 │   │   ├── recipes/
@@ -98,7 +81,15 @@ Project File Structure details
 │   ├── data/                         # Data and environment configuration
 │   └── proxy.ts                      # Clerk Protected Route Rules
 │
-├── drizzle.config.ts                 # Drizzle Kit CLI Config
+├── prisma/                           # GLOBAL DATABASE SCHEMAS & CONFIGS
+│   ├── models/                       # Modular Prisma schemas
+│   │   ├── core.prisma               # Main core tables (recipes, users)
+│   │   ├── junction.prisma           # Many-to-many relationship tables
+│   │   └── lookup.prisma             # Categories, tags, tools lookup tables
+│   ├── schema.prisma                 # Main schema entry point
+│   └── seed.ts                       # Database seeding script
+│
+├── prisma.config.ts                  # Prisma Runner/CLI Config
 ├── next.config.ts
 ├── eslint.config.mjs
 ├── postcss.config.mjs

@@ -58,6 +58,16 @@ export type RecipeTag = Prisma.RecipeTagModel
  */
 export type RecipeTool = Prisma.RecipeToolModel
 /**
+ * Model RecipeView
+ * 
+ */
+export type RecipeView = Prisma.RecipeViewModel
+/**
+ * Model EditorsChoice
+ * 
+ */
+export type EditorsChoice = Prisma.EditorsChoiceModel
+/**
  * Model Course
  * 
  */

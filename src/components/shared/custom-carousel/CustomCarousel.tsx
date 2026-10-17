@@ -4,29 +4,16 @@ import {
     Carousel,
     CarouselApi,
     CarouselContent,
-    CarouselItem,
 } from '@/components/ui/carousel'
 
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
-interface CustomCarouselProps<T> {
-    data: T[]
-    getKey: (item: T) => string
-    getHref: (item: T) => string
-    renderImage: (item: T) => React.ReactNode
-    renderBody: (item: T) => React.ReactNode
-    basisClassName?: string // override slide width per section, defaults below
+interface CustomCarouselProps {
+    children: React.ReactNode
 }
 
-export default function CustomCarousel<T>({
-    data,
-    getKey,
-    getHref,
-    renderImage,
-    renderBody,
-    basisClassName = 'basis-full sm:basis-1/2 md:basis-1/2 lg:basis-1/4 ',
-}: CustomCarouselProps<T>) {
+export default function CustomCarousel({ children }: CustomCarouselProps) {
     const [carouselApi, setCarouselApi] = useState<CarouselApi>()
     const [canScrollPrev, setCanScrollPrev] = useState(false)
     const [canScrollNext, setCanScrollNext] = useState(false)
@@ -48,22 +35,7 @@ export default function CustomCarousel<T>({
         <div className="w-full">
             <Carousel setApi={setCarouselApi} className="w-full max-w-full">
                 <CarouselContent className="hide-scrollbar w-full max-w-full">
-                    {data.map((item) => (
-                        <CarouselItem
-                            key={getKey(item)}
-                            className={`my-1 flex min-w-0 shrink-0 grow-0 pl-6 ${basisClassName}`}
-                        >
-                            <a
-                                href={getHref(item)}
-                                className="group border-border bg-card hover:border-primary/45 flex h-full w-full flex-col overflow-hidden rounded-md border transition-all hover:-translate-y-0.5 hover:shadow-lg"
-                            >
-                                <div className="bg-muted relative aspect-[4/3] w-full">
-                                    {renderImage(item)}
-                                </div>
-                                {renderBody(item)}
-                            </a>
-                        </CarouselItem>
-                    ))}
+                    {children}
                 </CarouselContent>
             </Carousel>
             <div className="mt-8 flex flex-row items-center justify-between gap-4 md:flex-row">

@@ -28,18 +28,27 @@ export type RecipeTagMinAggregateOutputType = {
   id: string | null
   recipeId: string | null
   tagId: string | null
+  createdAt: Date | null
+  isPrimary: boolean | null
+  updatedAt: Date | null
 }
 
 export type RecipeTagMaxAggregateOutputType = {
   id: string | null
   recipeId: string | null
   tagId: string | null
+  createdAt: Date | null
+  isPrimary: boolean | null
+  updatedAt: Date | null
 }
 
 export type RecipeTagCountAggregateOutputType = {
   id: number
   recipeId: number
   tagId: number
+  createdAt: number
+  isPrimary: number
+  updatedAt: number
   _all: number
 }
 
@@ -48,18 +57,27 @@ export type RecipeTagMinAggregateInputType = {
   id?: true
   recipeId?: true
   tagId?: true
+  createdAt?: true
+  isPrimary?: true
+  updatedAt?: true
 }
 
 export type RecipeTagMaxAggregateInputType = {
   id?: true
   recipeId?: true
   tagId?: true
+  createdAt?: true
+  isPrimary?: true
+  updatedAt?: true
 }
 
 export type RecipeTagCountAggregateInputType = {
   id?: true
   recipeId?: true
   tagId?: true
+  createdAt?: true
+  isPrimary?: true
+  updatedAt?: true
   _all?: true
 }
 
@@ -139,6 +157,9 @@ export type RecipeTagGroupByOutputType = {
   id: string
   recipeId: string
   tagId: string
+  createdAt: Date
+  isPrimary: boolean
+  updatedAt: Date
   _count: RecipeTagCountAggregateOutputType | null
   _min: RecipeTagMinAggregateOutputType | null
   _max: RecipeTagMaxAggregateOutputType | null
@@ -166,6 +187,9 @@ export type RecipeTagWhereInput = {
   id?: Prisma.UuidFilter<"RecipeTag"> | string
   recipeId?: Prisma.UuidFilter<"RecipeTag"> | string
   tagId?: Prisma.UuidFilter<"RecipeTag"> | string
+  createdAt?: Prisma.DateTimeFilter<"RecipeTag"> | Date | string
+  isPrimary?: Prisma.BoolFilter<"RecipeTag"> | boolean
+  updatedAt?: Prisma.DateTimeFilter<"RecipeTag"> | Date | string
   recipe?: Prisma.XOR<Prisma.RecipeScalarRelationFilter, Prisma.RecipeWhereInput>
   tag?: Prisma.XOR<Prisma.TagScalarRelationFilter, Prisma.TagWhereInput>
 }
@@ -174,6 +198,9 @@ export type RecipeTagOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   recipeId?: Prisma.SortOrder
   tagId?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  isPrimary?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   recipe?: Prisma.RecipeOrderByWithRelationInput
   tag?: Prisma.TagOrderByWithRelationInput
 }
@@ -186,6 +213,9 @@ export type RecipeTagWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.RecipeTagWhereInput | Prisma.RecipeTagWhereInput[]
   recipeId?: Prisma.UuidFilter<"RecipeTag"> | string
   tagId?: Prisma.UuidFilter<"RecipeTag"> | string
+  createdAt?: Prisma.DateTimeFilter<"RecipeTag"> | Date | string
+  isPrimary?: Prisma.BoolFilter<"RecipeTag"> | boolean
+  updatedAt?: Prisma.DateTimeFilter<"RecipeTag"> | Date | string
   recipe?: Prisma.XOR<Prisma.RecipeScalarRelationFilter, Prisma.RecipeWhereInput>
   tag?: Prisma.XOR<Prisma.TagScalarRelationFilter, Prisma.TagWhereInput>
 }, "id" | "recipeId_tagId">
@@ -194,6 +224,9 @@ export type RecipeTagOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   recipeId?: Prisma.SortOrder
   tagId?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  isPrimary?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   _count?: Prisma.RecipeTagCountOrderByAggregateInput
   _max?: Prisma.RecipeTagMaxOrderByAggregateInput
   _min?: Prisma.RecipeTagMinOrderByAggregateInput
@@ -206,46 +239,70 @@ export type RecipeTagScalarWhereWithAggregatesInput = {
   id?: Prisma.UuidWithAggregatesFilter<"RecipeTag"> | string
   recipeId?: Prisma.UuidWithAggregatesFilter<"RecipeTag"> | string
   tagId?: Prisma.UuidWithAggregatesFilter<"RecipeTag"> | string
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"RecipeTag"> | Date | string
+  isPrimary?: Prisma.BoolWithAggregatesFilter<"RecipeTag"> | boolean
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"RecipeTag"> | Date | string
 }
 
 export type RecipeTagCreateInput = {
   id?: string
-  recipe: Prisma.RecipeCreateNestedOneWithoutTagsInput
-  tag: Prisma.TagCreateNestedOneWithoutRecipesInput
+  createdAt?: Date | string
+  isPrimary?: boolean
+  updatedAt?: Date | string
+  recipe: Prisma.RecipeCreateNestedOneWithoutRecipeTagsInput
+  tag: Prisma.TagCreateNestedOneWithoutRecipeTagsInput
 }
 
 export type RecipeTagUncheckedCreateInput = {
   id?: string
   recipeId: string
   tagId: string
+  createdAt?: Date | string
+  isPrimary?: boolean
+  updatedAt?: Date | string
 }
 
 export type RecipeTagUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  recipe?: Prisma.RecipeUpdateOneRequiredWithoutTagsNestedInput
-  tag?: Prisma.TagUpdateOneRequiredWithoutRecipesNestedInput
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  recipe?: Prisma.RecipeUpdateOneRequiredWithoutRecipeTagsNestedInput
+  tag?: Prisma.TagUpdateOneRequiredWithoutRecipeTagsNestedInput
 }
 
 export type RecipeTagUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   recipeId?: Prisma.StringFieldUpdateOperationsInput | string
   tagId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type RecipeTagCreateManyInput = {
   id?: string
   recipeId: string
   tagId: string
+  createdAt?: Date | string
+  isPrimary?: boolean
+  updatedAt?: Date | string
 }
 
 export type RecipeTagUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type RecipeTagUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   recipeId?: Prisma.StringFieldUpdateOperationsInput | string
   tagId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type RecipeTagListRelationFilter = {
@@ -267,18 +324,27 @@ export type RecipeTagCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   recipeId?: Prisma.SortOrder
   tagId?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  isPrimary?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type RecipeTagMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   recipeId?: Prisma.SortOrder
   tagId?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  isPrimary?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type RecipeTagMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   recipeId?: Prisma.SortOrder
   tagId?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  isPrimary?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type RecipeTagCreateNestedManyWithoutRecipeInput = {
@@ -367,12 +433,18 @@ export type RecipeTagUncheckedUpdateManyWithoutTagNestedInput = {
 
 export type RecipeTagCreateWithoutRecipeInput = {
   id?: string
-  tag: Prisma.TagCreateNestedOneWithoutRecipesInput
+  createdAt?: Date | string
+  isPrimary?: boolean
+  updatedAt?: Date | string
+  tag: Prisma.TagCreateNestedOneWithoutRecipeTagsInput
 }
 
 export type RecipeTagUncheckedCreateWithoutRecipeInput = {
   id?: string
   tagId: string
+  createdAt?: Date | string
+  isPrimary?: boolean
+  updatedAt?: Date | string
 }
 
 export type RecipeTagCreateOrConnectWithoutRecipeInput = {
@@ -408,16 +480,25 @@ export type RecipeTagScalarWhereInput = {
   id?: Prisma.UuidFilter<"RecipeTag"> | string
   recipeId?: Prisma.UuidFilter<"RecipeTag"> | string
   tagId?: Prisma.UuidFilter<"RecipeTag"> | string
+  createdAt?: Prisma.DateTimeFilter<"RecipeTag"> | Date | string
+  isPrimary?: Prisma.BoolFilter<"RecipeTag"> | boolean
+  updatedAt?: Prisma.DateTimeFilter<"RecipeTag"> | Date | string
 }
 
 export type RecipeTagCreateWithoutTagInput = {
   id?: string
-  recipe: Prisma.RecipeCreateNestedOneWithoutTagsInput
+  createdAt?: Date | string
+  isPrimary?: boolean
+  updatedAt?: Date | string
+  recipe: Prisma.RecipeCreateNestedOneWithoutRecipeTagsInput
 }
 
 export type RecipeTagUncheckedCreateWithoutTagInput = {
   id?: string
   recipeId: string
+  createdAt?: Date | string
+  isPrimary?: boolean
+  updatedAt?: Date | string
 }
 
 export type RecipeTagCreateOrConnectWithoutTagInput = {
@@ -449,41 +530,65 @@ export type RecipeTagUpdateManyWithWhereWithoutTagInput = {
 export type RecipeTagCreateManyRecipeInput = {
   id?: string
   tagId: string
+  createdAt?: Date | string
+  isPrimary?: boolean
+  updatedAt?: Date | string
 }
 
 export type RecipeTagUpdateWithoutRecipeInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  tag?: Prisma.TagUpdateOneRequiredWithoutRecipesNestedInput
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tag?: Prisma.TagUpdateOneRequiredWithoutRecipeTagsNestedInput
 }
 
 export type RecipeTagUncheckedUpdateWithoutRecipeInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   tagId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type RecipeTagUncheckedUpdateManyWithoutRecipeInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   tagId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type RecipeTagCreateManyTagInput = {
   id?: string
   recipeId: string
+  createdAt?: Date | string
+  isPrimary?: boolean
+  updatedAt?: Date | string
 }
 
 export type RecipeTagUpdateWithoutTagInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  recipe?: Prisma.RecipeUpdateOneRequiredWithoutTagsNestedInput
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  recipe?: Prisma.RecipeUpdateOneRequiredWithoutRecipeTagsNestedInput
 }
 
 export type RecipeTagUncheckedUpdateWithoutTagInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   recipeId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type RecipeTagUncheckedUpdateManyWithoutTagInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   recipeId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isPrimary?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -492,6 +597,9 @@ export type RecipeTagSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   id?: boolean
   recipeId?: boolean
   tagId?: boolean
+  createdAt?: boolean
+  isPrimary?: boolean
+  updatedAt?: boolean
   recipe?: boolean | Prisma.RecipeDefaultArgs<ExtArgs>
   tag?: boolean | Prisma.TagDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["recipeTag"]>
@@ -500,6 +608,9 @@ export type RecipeTagSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   id?: boolean
   recipeId?: boolean
   tagId?: boolean
+  createdAt?: boolean
+  isPrimary?: boolean
+  updatedAt?: boolean
   recipe?: boolean | Prisma.RecipeDefaultArgs<ExtArgs>
   tag?: boolean | Prisma.TagDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["recipeTag"]>
@@ -508,6 +619,9 @@ export type RecipeTagSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
   id?: boolean
   recipeId?: boolean
   tagId?: boolean
+  createdAt?: boolean
+  isPrimary?: boolean
+  updatedAt?: boolean
   recipe?: boolean | Prisma.RecipeDefaultArgs<ExtArgs>
   tag?: boolean | Prisma.TagDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["recipeTag"]>
@@ -516,9 +630,12 @@ export type RecipeTagSelectScalar = {
   id?: boolean
   recipeId?: boolean
   tagId?: boolean
+  createdAt?: boolean
+  isPrimary?: boolean
+  updatedAt?: boolean
 }
 
-export type RecipeTagOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "recipeId" | "tagId", ExtArgs["result"]["recipeTag"]>
+export type RecipeTagOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "recipeId" | "tagId" | "createdAt" | "isPrimary" | "updatedAt", ExtArgs["result"]["recipeTag"]>
 export type RecipeTagInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   recipe?: boolean | Prisma.RecipeDefaultArgs<ExtArgs>
   tag?: boolean | Prisma.TagDefaultArgs<ExtArgs>
@@ -542,6 +659,9 @@ export type $RecipeTagPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     id: string
     recipeId: string
     tagId: string
+    createdAt: Date
+    isPrimary: boolean
+    updatedAt: Date
   }, ExtArgs["result"]["recipeTag"]>
   composites: {}
 }
@@ -970,6 +1090,9 @@ export interface RecipeTagFieldRefs {
   readonly id: Prisma.FieldRef<"RecipeTag", 'String'>
   readonly recipeId: Prisma.FieldRef<"RecipeTag", 'String'>
   readonly tagId: Prisma.FieldRef<"RecipeTag", 'String'>
+  readonly createdAt: Prisma.FieldRef<"RecipeTag", 'DateTime'>
+  readonly isPrimary: Prisma.FieldRef<"RecipeTag", 'Boolean'>
+  readonly updatedAt: Prisma.FieldRef<"RecipeTag", 'DateTime'>
 }
     
 

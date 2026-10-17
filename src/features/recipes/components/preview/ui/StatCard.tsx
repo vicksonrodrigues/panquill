@@ -6,19 +6,24 @@ import {
     CardTitle,
 } from '@/components/ui/card'
 import { Skeleton } from '@/components/ui/skeleton'
+import { LucideIcon } from 'lucide-react'
 import React from 'react'
 
 type StatCardProps = {
     label: string
-    value?: string | null
+    value: string | null
+    Icon?: LucideIcon
 }
 
-export default function StatCard({ label, value }: StatCardProps) {
+export default function StatCard({ label, value, Icon }: StatCardProps) {
     return (
-        <Card className="justify-between rounded-lg p-2.5 text-center">
+        <Card className="justify-around rounded-lg py-2.5 text-center">
             <CardHeader>
                 <CardTitle>
-                    <Typography variant={'statLabel'}>{label}</Typography>
+                    <div className="flex items-center justify-center gap-1">
+                        {Icon && <Icon size={16} />}
+                        <Typography variant={'statLabel'}>{label}</Typography>
+                    </div>
                 </CardTitle>
             </CardHeader>
             <CardDescription>

@@ -1,23 +1,24 @@
 model FavouriteRecipe {
   id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz
-  //Relation
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
   userId    String   @map("user_id")
-  user      User     @relation(fields: [userId], references: [id])
   recipeId  String   @map("recipe_id") @db.Uuid
   recipe    Recipe   @relation(fields: [recipeId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
 
   @@unique([userId, recipeId])
   @@map("favourite_recipes")
 }
 
 model RecipeCuisine {
-  id        String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  //Relation
-  recipeId  String  @map("recipe_id") @db.Uuid
-  recipe    Recipe  @relation(fields: [recipeId], references: [id])
-  cuisineId String  @map("cuisine_id") @db.Uuid
-  cuisine   Cuisine @relation(fields: [cuisineId], references: [id])
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  recipeId  String   @map("recipe_id") @db.Uuid
+  cuisineId String   @map("cuisine_id") @db.Uuid
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  isPrimary Boolean  @default(false) @map("is_primary")
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at") @db.Timestamptz(6)
+  cuisine   Cuisine  @relation(fields: [cuisineId], references: [id])
+  recipe    Recipe   @relation(fields: [recipeId], references: [id])
 
   @@unique([recipeId, cuisineId])
   @@map("recipe_cuisines")
@@ -26,13 +27,12 @@ model RecipeCuisine {
 model RecipeIngredient {
   id           String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   quantity     String
-  createdAt    DateTime   @default(now()) @map("created_at") @db.Timestamptz
-  updatedAt    DateTime   @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
-  //Relation
+  createdAt    DateTime   @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt    DateTime   @default(now()) @updatedAt @map("updated_at") @db.Timestamptz(6)
   recipeId     String     @map("recipe_id") @db.Uuid
-  recipe       Recipe     @relation(fields: [recipeId], references: [id])
   ingredientId String     @map("ingredient_id") @db.Uuid
   ingredient   Ingredient @relation(fields: [ingredientId], references: [id])
+  recipe       Recipe     @relation(fields: [recipeId], references: [id])
 
   @@unique([recipeId, ingredientId])
   @@map("recipe_ingredients")
@@ -41,25 +41,26 @@ model RecipeIngredient {
 model RecipeRating {
   id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   rating    Int      @db.SmallInt
-  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz
-  updatedAt DateTime @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
-  //Relation
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at") @db.Timestamptz(6)
   userId    String   @map("user_id")
-  user      User     @relation(fields: [userId], references: [id])
   recipeId  String   @map("recipe_id") @db.Uuid
   recipe    Recipe   @relation(fields: [recipeId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
 
   @@unique([recipeId, userId])
   @@map("recipe_ratings")
 }
 
 model RecipeTag {
-  id       String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  //Relation
-  recipeId String @map("recipe_id") @db.Uuid
-  recipe   Recipe @relation(fields: [recipeId], references: [id])
-  tagId    String @map("tag_id") @db.Uuid
-  tag      Tag    @relation(fields: [tagId], references: [id])
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  recipeId  String   @map("recipe_id") @db.Uuid
+  tagId     String   @map("tag_id") @db.Uuid
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  isPrimary Boolean  @default(false) @map("is_primary")
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at") @db.Timestamptz(6)
+  recipe    Recipe   @relation(fields: [recipeId], references: [id])
+  tag       Tag      @relation(fields: [tagId], references: [id])
 
   @@unique([recipeId, tagId])
   @@map("recipe_tags")
@@ -67,12 +68,34 @@ model RecipeTag {
 
 model RecipeTool {
   id       String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  //Relation
   recipeId String @map("recipe_id") @db.Uuid
-  recipe   Recipe @relation(fields: [recipeId], references: [id])
   toolId   String @map("tool_id") @db.Uuid
+  recipe   Recipe @relation(fields: [recipeId], references: [id])
   tool     Tool   @relation(fields: [toolId], references: [id])
 
   @@unique([recipeId, toolId])
   @@map("recipe_tools")
+}
+
+model RecipeView {
+  id       String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  viewedAt DateTime @default(now()) @map("viewed_at") @db.Timestamptz(6)
+  userId   String   @map("user_id")
+  recipeId String   @map("recipe_id") @db.Uuid
+  recipe   Recipe   @relation(fields: [recipeId], references: [id])
+  user     User     @relation(fields: [userId], references: [id])
+
+  @@unique([userId, recipeId])
+  @@index([userId, viewedAt])
+  @@map("recipe_views")
+}
+
+model EditorsChoice {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  recipe    Recipe   @relation(fields: [recipeId], references: [id])
+  recipeId  String   @unique @map("recipe_id") @db.Uuid
+  order     Int
+  startedAt DateTime @default(now()) @map("selected_at")
+
+  @@map("editors_choice")
 }

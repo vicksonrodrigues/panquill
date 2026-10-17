@@ -80,12 +80,12 @@ export type PrismaVersion = {
 }
 
 /**
- * Prisma Client JS version: 7.8.0
- * Query Engine version: 3c6e192761c0362d496ed980de936e2f3cebcd3a
+ * Prisma Client JS version: 7.9.1
+ * Query Engine version: e922089b7d7502aff4249d5da3420f6fa55fc6ad
  */
 export const prismaVersion: PrismaVersion = {
-  client: "7.8.0",
-  engine: "3c6e192761c0362d496ed980de936e2f3cebcd3a"
+  client: "7.9.1",
+  engine: "e922089b7d7502aff4249d5da3420f6fa55fc6ad"
 }
 
 /**
@@ -156,6 +156,19 @@ export type Subset<T, U> = {
 };
 
 /**
+ * Resolved type of the argument passed to the `PrismaClient` constructor.
+ *
+ * When called without a narrower options type (the common case), this resolves
+ * to `PrismaClientOptions` directly, which produces a clear TypeScript error
+ * message (`not assignable to parameter of type 'PrismaClientOptions'`) when
+ * the argument is missing or incomplete. When the user supplies a narrower
+ * options type (e.g. via a literal), it falls back to `Subset` to keep
+ * filtering out unknown properties.
+ */
+export type PrismaClientConstructorArgs<Options extends PrismaClientOptions> =
+  [PrismaClientOptions] extends [Options] ? PrismaClientOptions : Subset<Options, PrismaClientOptions>;
+
+/**
  * SelectSubset
  * @desc From `T` pick properties that exist in `U`. Simple version of Intersection.
  * Additionally, it validates, if both select and include are present. If the case, it errors.
@@ -187,7 +200,7 @@ type Without<T, U> = { [P in Exclude<keyof T, keyof U>]?: never };
 export type XOR<T, U> =
   T extends object ?
   U extends object ?
-    (Without<T, U> & U) | (Without<U, T> & T)
+    ((Without<T, U> & U) | (Without<U, T> & T)) & object
   : U : T
 
 
@@ -392,6 +405,8 @@ export const ModelName = {
   RecipeRating: 'RecipeRating',
   RecipeTag: 'RecipeTag',
   RecipeTool: 'RecipeTool',
+  RecipeView: 'RecipeView',
+  EditorsChoice: 'EditorsChoice',
   Course: 'Course',
   Cuisine: 'Cuisine',
   Ingredient: 'Ingredient',
@@ -412,7 +427,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "recipe" | "favouriteRecipe" | "recipeCuisine" | "recipeIngredient" | "recipeRating" | "recipeTag" | "recipeTool" | "course" | "cuisine" | "ingredient" | "tag" | "tool"
+    modelProps: "user" | "recipe" | "favouriteRecipe" | "recipeCuisine" | "recipeIngredient" | "recipeRating" | "recipeTag" | "recipeTool" | "recipeView" | "editorsChoice" | "course" | "cuisine" | "ingredient" | "tag" | "tool"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1008,6 +1023,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    RecipeView: {
+      payload: Prisma.$RecipeViewPayload<ExtArgs>
+      fields: Prisma.RecipeViewFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.RecipeViewFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RecipeViewPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.RecipeViewFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RecipeViewPayload>
+        }
+        findFirst: {
+          args: Prisma.RecipeViewFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RecipeViewPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.RecipeViewFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RecipeViewPayload>
+        }
+        findMany: {
+          args: Prisma.RecipeViewFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RecipeViewPayload>[]
+        }
+        create: {
+          args: Prisma.RecipeViewCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RecipeViewPayload>
+        }
+        createMany: {
+          args: Prisma.RecipeViewCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.RecipeViewCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RecipeViewPayload>[]
+        }
+        delete: {
+          args: Prisma.RecipeViewDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RecipeViewPayload>
+        }
+        update: {
+          args: Prisma.RecipeViewUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RecipeViewPayload>
+        }
+        deleteMany: {
+          args: Prisma.RecipeViewDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.RecipeViewUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.RecipeViewUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RecipeViewPayload>[]
+        }
+        upsert: {
+          args: Prisma.RecipeViewUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RecipeViewPayload>
+        }
+        aggregate: {
+          args: Prisma.RecipeViewAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateRecipeView>
+        }
+        groupBy: {
+          args: Prisma.RecipeViewGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RecipeViewGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.RecipeViewCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RecipeViewCountAggregateOutputType> | number
+        }
+      }
+    }
+    EditorsChoice: {
+      payload: Prisma.$EditorsChoicePayload<ExtArgs>
+      fields: Prisma.EditorsChoiceFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.EditorsChoiceFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EditorsChoicePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.EditorsChoiceFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EditorsChoicePayload>
+        }
+        findFirst: {
+          args: Prisma.EditorsChoiceFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EditorsChoicePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.EditorsChoiceFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EditorsChoicePayload>
+        }
+        findMany: {
+          args: Prisma.EditorsChoiceFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EditorsChoicePayload>[]
+        }
+        create: {
+          args: Prisma.EditorsChoiceCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EditorsChoicePayload>
+        }
+        createMany: {
+          args: Prisma.EditorsChoiceCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.EditorsChoiceCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EditorsChoicePayload>[]
+        }
+        delete: {
+          args: Prisma.EditorsChoiceDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EditorsChoicePayload>
+        }
+        update: {
+          args: Prisma.EditorsChoiceUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EditorsChoicePayload>
+        }
+        deleteMany: {
+          args: Prisma.EditorsChoiceDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.EditorsChoiceUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.EditorsChoiceUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EditorsChoicePayload>[]
+        }
+        upsert: {
+          args: Prisma.EditorsChoiceUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EditorsChoicePayload>
+        }
+        aggregate: {
+          args: Prisma.EditorsChoiceAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateEditorsChoice>
+        }
+        groupBy: {
+          args: Prisma.EditorsChoiceGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EditorsChoiceGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.EditorsChoiceCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EditorsChoiceCountAggregateOutputType> | number
+        }
+      }
+    }
     Course: {
       payload: Prisma.$CoursePayload<ExtArgs>
       fields: Prisma.CourseFieldRefs
@@ -1435,6 +1598,7 @@ export const RecipeScalarFieldEnum = {
   id: 'id',
   title: 'title',
   description: 'description',
+  recipeUrl: 'recipeUrl',
   imageUrl: 'imageUrl',
   prepTime: 'prepTime',
   cookTime: 'cookTime',
@@ -1449,7 +1613,8 @@ export const RecipeScalarFieldEnum = {
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   authorId: 'authorId',
-  courseId: 'courseId'
+  courseId: 'courseId',
+  hotScore: 'hotScore'
 } as const
 
 export type RecipeScalarFieldEnum = (typeof RecipeScalarFieldEnum)[keyof typeof RecipeScalarFieldEnum]
@@ -1468,7 +1633,10 @@ export type FavouriteRecipeScalarFieldEnum = (typeof FavouriteRecipeScalarFieldE
 export const RecipeCuisineScalarFieldEnum = {
   id: 'id',
   recipeId: 'recipeId',
-  cuisineId: 'cuisineId'
+  cuisineId: 'cuisineId',
+  createdAt: 'createdAt',
+  isPrimary: 'isPrimary',
+  updatedAt: 'updatedAt'
 } as const
 
 export type RecipeCuisineScalarFieldEnum = (typeof RecipeCuisineScalarFieldEnum)[keyof typeof RecipeCuisineScalarFieldEnum]
@@ -1501,7 +1669,10 @@ export type RecipeRatingScalarFieldEnum = (typeof RecipeRatingScalarFieldEnum)[k
 export const RecipeTagScalarFieldEnum = {
   id: 'id',
   recipeId: 'recipeId',
-  tagId: 'tagId'
+  tagId: 'tagId',
+  createdAt: 'createdAt',
+  isPrimary: 'isPrimary',
+  updatedAt: 'updatedAt'
 } as const
 
 export type RecipeTagScalarFieldEnum = (typeof RecipeTagScalarFieldEnum)[keyof typeof RecipeTagScalarFieldEnum]
@@ -1514,6 +1685,26 @@ export const RecipeToolScalarFieldEnum = {
 } as const
 
 export type RecipeToolScalarFieldEnum = (typeof RecipeToolScalarFieldEnum)[keyof typeof RecipeToolScalarFieldEnum]
+
+
+export const RecipeViewScalarFieldEnum = {
+  id: 'id',
+  viewedAt: 'viewedAt',
+  userId: 'userId',
+  recipeId: 'recipeId'
+} as const
+
+export type RecipeViewScalarFieldEnum = (typeof RecipeViewScalarFieldEnum)[keyof typeof RecipeViewScalarFieldEnum]
+
+
+export const EditorsChoiceScalarFieldEnum = {
+  id: 'id',
+  recipeId: 'recipeId',
+  order: 'order',
+  startedAt: 'startedAt'
+} as const
+
+export type EditorsChoiceScalarFieldEnum = (typeof EditorsChoiceScalarFieldEnum)[keyof typeof EditorsChoiceScalarFieldEnum]
 
 
 export const CourseScalarFieldEnum = {
@@ -1673,19 +1864,10 @@ export type BatchPayload = {
 export const defineExtension = runtime.Extensions.defineExtension as unknown as runtime.Types.Extensions.ExtendsHook<"define", TypeMapCb, runtime.Types.Extensions.DefaultArgs>
 export type DefaultPrismaClient = PrismaClient
 export type ErrorFormat = 'pretty' | 'colorless' | 'minimal'
-export type PrismaClientOptions = ({
-  /**
-   * Instance of a Driver Adapter, e.g., like one provided by `@prisma/adapter-pg`.
-   */
-  adapter: runtime.SqlDriverAdapterFactory
-  accelerateUrl?: never
-} | {
-  /**
-   * Prisma Accelerate URL allowing the client to connect through Accelerate instead of a direct database.
-   */
-  accelerateUrl: string
-  adapter?: never
-}) & {
+/**
+ * Options common to all variants of `PrismaClientOptions`, regardless of whether you connect to your database through a driver adapter or through Prisma Accelerate.
+ */
+export interface PrismaClientBaseOptions {
   /**
    * @default "colorless"
    */
@@ -1772,6 +1954,56 @@ export type PrismaClientOptions = ({
    */
   queryPlanCacheMaxSize?: number
 }
+
+/**
+ * `PrismaClient` options for connecting to your database through Prisma Accelerate instead of a driver adapter.
+ * 
+ * Learn more: https://pris.ly/d/accelerate
+ */
+export interface PrismaClientOptionsWithAccelerateUrl extends PrismaClientBaseOptions {
+  /**
+   * The Prisma Accelerate connection URL. Use this option to connect to your database through Prisma Accelerate instead of using a driver adapter to connect directly.
+   * 
+   * Learn more: https://pris.ly/d/accelerate
+   */
+  accelerateUrl: string
+  adapter?: never
+}
+
+/**
+ * `PrismaClient` options for connecting to your database through a driver adapter. This is the common case in Prisma 7.
+ * 
+ * Learn more: https://pris.ly/d/driver-adapters
+ */
+export interface PrismaClientOptionsWithAdapter extends PrismaClientBaseOptions {
+  /**
+   * A driver adapter that PrismaClient uses to connect to your database, such as the ones provided by `@prisma/adapter-pg`, `@prisma/adapter-libsql`, `@prisma/adapter-planetscale`, etc.
+   * 
+   * A driver adapter is **required** unless you connect to your database through Prisma Accelerate (in which case use `accelerateUrl` instead).
+   * 
+   * Learn more: https://pris.ly/d/driver-adapters
+   * 
+   * @example
+   * ```ts
+   * import { PrismaPg } from '@prisma/adapter-pg'
+   * import { PrismaClient } from './generated/prisma/client'
+   * 
+   * const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL })
+   * const prisma = new PrismaClient({ adapter })
+   * ```
+   */
+  adapter: runtime.SqlDriverAdapterFactory
+  accelerateUrl?: never
+}
+
+/**
+ * Options passed to the `PrismaClient` constructor.
+ * 
+ * A driver adapter (or, alternatively, a Prisma Accelerate URL) is **required**. See {@link PrismaClientOptionsWithAdapter} and {@link PrismaClientOptionsWithAccelerateUrl} for the two variants. All other properties live in {@link PrismaClientBaseOptions} and are optional.
+ * 
+ * Learn more about driver adapters: https://pris.ly/d/driver-adapters
+ */
+export type PrismaClientOptions = PrismaClientOptionsWithAccelerateUrl | PrismaClientOptionsWithAdapter
 export type GlobalOmitConfig = {
   user?: Prisma.UserOmit
   recipe?: Prisma.RecipeOmit
@@ -1781,6 +2013,8 @@ export type GlobalOmitConfig = {
   recipeRating?: Prisma.RecipeRatingOmit
   recipeTag?: Prisma.RecipeTagOmit
   recipeTool?: Prisma.RecipeToolOmit
+  recipeView?: Prisma.RecipeViewOmit
+  editorsChoice?: Prisma.EditorsChoiceOmit
   course?: Prisma.CourseOmit
   cuisine?: Prisma.CuisineOmit
   ingredient?: Prisma.IngredientOmit

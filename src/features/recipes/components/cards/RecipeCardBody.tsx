@@ -4,8 +4,8 @@ interface RecipeCardBodyProps {
     title: string
     description: string
     course: string
-    cuisine: string
-    tag: string
+    cuisines: string[]
+    tags: string[]
     totalMins: number
     viewCount: number
     saveCount: number
@@ -20,8 +20,8 @@ export function RecipeCardBody({
     title,
     description,
     course,
-    cuisine,
-    tag,
+    cuisines,
+    tags,
     totalMins,
     viewCount,
     saveCount,
@@ -40,13 +40,22 @@ export function RecipeCardBody({
                     <span className="bg-accent text-accent-foreground rounded-full px-2 py-0.5 text-[10px] font-semibold">
                         {course}
                     </span>
-                    <span className="bg-accent text-accent-foreground rounded-full px-2 py-0.5 text-[10px] font-semibold">
-                        {cuisine}
-                    </span>
-
-                    <span className="bg-accent text-accent-foreground rounded-full px-2 py-0.5 text-[10px] font-semibold">
-                        {tag}
-                    </span>
+                    {cuisines!.map((cuisine, i) => (
+                        <span
+                            key={i}
+                            className="bg-accent text-accent-foreground rounded-full px-2 py-0.5 text-[10px] font-semibold"
+                        >
+                            {cuisine}
+                        </span>
+                    ))}
+                    {tags!.map((tag, i) => (
+                        <span
+                            key={i}
+                            className="bg-accent text-accent-foreground rounded-full px-2 py-0.5 text-[10px] font-semibold"
+                        >
+                            {tag}
+                        </span>
+                    ))}
                 </div>
             </div>
             <div className="text-muted-foreground flex items-center gap-1.5 text-[11.5px]">

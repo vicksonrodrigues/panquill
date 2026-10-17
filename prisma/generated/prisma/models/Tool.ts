@@ -182,7 +182,7 @@ export type ToolWhereInput = {
   value?: Prisma.StringFilter<"Tool"> | string
   createdAt?: Prisma.DateTimeFilter<"Tool"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Tool"> | Date | string
-  recipes?: Prisma.RecipeToolListRelationFilter
+  recipeTools?: Prisma.RecipeToolListRelationFilter
 }
 
 export type ToolOrderByWithRelationInput = {
@@ -191,7 +191,7 @@ export type ToolOrderByWithRelationInput = {
   value?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  recipes?: Prisma.RecipeToolOrderByRelationAggregateInput
+  recipeTools?: Prisma.RecipeToolOrderByRelationAggregateInput
 }
 
 export type ToolWhereUniqueInput = Prisma.AtLeast<{
@@ -203,7 +203,7 @@ export type ToolWhereUniqueInput = Prisma.AtLeast<{
   label?: Prisma.StringFilter<"Tool"> | string
   createdAt?: Prisma.DateTimeFilter<"Tool"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Tool"> | Date | string
-  recipes?: Prisma.RecipeToolListRelationFilter
+  recipeTools?: Prisma.RecipeToolListRelationFilter
 }, "id" | "value">
 
 export type ToolOrderByWithAggregationInput = {
@@ -234,7 +234,7 @@ export type ToolCreateInput = {
   value: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  recipes?: Prisma.RecipeToolCreateNestedManyWithoutToolInput
+  recipeTools?: Prisma.RecipeToolCreateNestedManyWithoutToolInput
 }
 
 export type ToolUncheckedCreateInput = {
@@ -243,7 +243,7 @@ export type ToolUncheckedCreateInput = {
   value: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  recipes?: Prisma.RecipeToolUncheckedCreateNestedManyWithoutToolInput
+  recipeTools?: Prisma.RecipeToolUncheckedCreateNestedManyWithoutToolInput
 }
 
 export type ToolUpdateInput = {
@@ -252,7 +252,7 @@ export type ToolUpdateInput = {
   value?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  recipes?: Prisma.RecipeToolUpdateManyWithoutToolNestedInput
+  recipeTools?: Prisma.RecipeToolUpdateManyWithoutToolNestedInput
 }
 
 export type ToolUncheckedUpdateInput = {
@@ -261,7 +261,7 @@ export type ToolUncheckedUpdateInput = {
   value?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  recipes?: Prisma.RecipeToolUncheckedUpdateManyWithoutToolNestedInput
+  recipeTools?: Prisma.RecipeToolUncheckedUpdateManyWithoutToolNestedInput
 }
 
 export type ToolCreateManyInput = {
@@ -317,21 +317,21 @@ export type ToolMinOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
 }
 
-export type ToolCreateNestedOneWithoutRecipesInput = {
-  create?: Prisma.XOR<Prisma.ToolCreateWithoutRecipesInput, Prisma.ToolUncheckedCreateWithoutRecipesInput>
-  connectOrCreate?: Prisma.ToolCreateOrConnectWithoutRecipesInput
+export type ToolCreateNestedOneWithoutRecipeToolsInput = {
+  create?: Prisma.XOR<Prisma.ToolCreateWithoutRecipeToolsInput, Prisma.ToolUncheckedCreateWithoutRecipeToolsInput>
+  connectOrCreate?: Prisma.ToolCreateOrConnectWithoutRecipeToolsInput
   connect?: Prisma.ToolWhereUniqueInput
 }
 
-export type ToolUpdateOneRequiredWithoutRecipesNestedInput = {
-  create?: Prisma.XOR<Prisma.ToolCreateWithoutRecipesInput, Prisma.ToolUncheckedCreateWithoutRecipesInput>
-  connectOrCreate?: Prisma.ToolCreateOrConnectWithoutRecipesInput
-  upsert?: Prisma.ToolUpsertWithoutRecipesInput
+export type ToolUpdateOneRequiredWithoutRecipeToolsNestedInput = {
+  create?: Prisma.XOR<Prisma.ToolCreateWithoutRecipeToolsInput, Prisma.ToolUncheckedCreateWithoutRecipeToolsInput>
+  connectOrCreate?: Prisma.ToolCreateOrConnectWithoutRecipeToolsInput
+  upsert?: Prisma.ToolUpsertWithoutRecipeToolsInput
   connect?: Prisma.ToolWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.ToolUpdateToOneWithWhereWithoutRecipesInput, Prisma.ToolUpdateWithoutRecipesInput>, Prisma.ToolUncheckedUpdateWithoutRecipesInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ToolUpdateToOneWithWhereWithoutRecipeToolsInput, Prisma.ToolUpdateWithoutRecipeToolsInput>, Prisma.ToolUncheckedUpdateWithoutRecipeToolsInput>
 }
 
-export type ToolCreateWithoutRecipesInput = {
+export type ToolCreateWithoutRecipeToolsInput = {
   id?: string
   label: string
   value: string
@@ -339,7 +339,7 @@ export type ToolCreateWithoutRecipesInput = {
   updatedAt?: Date | string
 }
 
-export type ToolUncheckedCreateWithoutRecipesInput = {
+export type ToolUncheckedCreateWithoutRecipeToolsInput = {
   id?: string
   label: string
   value: string
@@ -347,23 +347,23 @@ export type ToolUncheckedCreateWithoutRecipesInput = {
   updatedAt?: Date | string
 }
 
-export type ToolCreateOrConnectWithoutRecipesInput = {
+export type ToolCreateOrConnectWithoutRecipeToolsInput = {
   where: Prisma.ToolWhereUniqueInput
-  create: Prisma.XOR<Prisma.ToolCreateWithoutRecipesInput, Prisma.ToolUncheckedCreateWithoutRecipesInput>
+  create: Prisma.XOR<Prisma.ToolCreateWithoutRecipeToolsInput, Prisma.ToolUncheckedCreateWithoutRecipeToolsInput>
 }
 
-export type ToolUpsertWithoutRecipesInput = {
-  update: Prisma.XOR<Prisma.ToolUpdateWithoutRecipesInput, Prisma.ToolUncheckedUpdateWithoutRecipesInput>
-  create: Prisma.XOR<Prisma.ToolCreateWithoutRecipesInput, Prisma.ToolUncheckedCreateWithoutRecipesInput>
+export type ToolUpsertWithoutRecipeToolsInput = {
+  update: Prisma.XOR<Prisma.ToolUpdateWithoutRecipeToolsInput, Prisma.ToolUncheckedUpdateWithoutRecipeToolsInput>
+  create: Prisma.XOR<Prisma.ToolCreateWithoutRecipeToolsInput, Prisma.ToolUncheckedCreateWithoutRecipeToolsInput>
   where?: Prisma.ToolWhereInput
 }
 
-export type ToolUpdateToOneWithWhereWithoutRecipesInput = {
+export type ToolUpdateToOneWithWhereWithoutRecipeToolsInput = {
   where?: Prisma.ToolWhereInput
-  data: Prisma.XOR<Prisma.ToolUpdateWithoutRecipesInput, Prisma.ToolUncheckedUpdateWithoutRecipesInput>
+  data: Prisma.XOR<Prisma.ToolUpdateWithoutRecipeToolsInput, Prisma.ToolUncheckedUpdateWithoutRecipeToolsInput>
 }
 
-export type ToolUpdateWithoutRecipesInput = {
+export type ToolUpdateWithoutRecipeToolsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   label?: Prisma.StringFieldUpdateOperationsInput | string
   value?: Prisma.StringFieldUpdateOperationsInput | string
@@ -371,7 +371,7 @@ export type ToolUpdateWithoutRecipesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type ToolUncheckedUpdateWithoutRecipesInput = {
+export type ToolUncheckedUpdateWithoutRecipeToolsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   label?: Prisma.StringFieldUpdateOperationsInput | string
   value?: Prisma.StringFieldUpdateOperationsInput | string
@@ -385,11 +385,11 @@ export type ToolUncheckedUpdateWithoutRecipesInput = {
  */
 
 export type ToolCountOutputType = {
-  recipes: number
+  recipeTools: number
 }
 
 export type ToolCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  recipes?: boolean | ToolCountOutputTypeCountRecipesArgs
+  recipeTools?: boolean | ToolCountOutputTypeCountRecipeToolsArgs
 }
 
 /**
@@ -405,7 +405,7 @@ export type ToolCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensi
 /**
  * ToolCountOutputType without action
  */
-export type ToolCountOutputTypeCountRecipesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type ToolCountOutputTypeCountRecipeToolsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.RecipeToolWhereInput
 }
 
@@ -416,7 +416,7 @@ export type ToolSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   value?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  recipes?: boolean | Prisma.Tool$recipesArgs<ExtArgs>
+  recipeTools?: boolean | Prisma.Tool$recipeToolsArgs<ExtArgs>
   _count?: boolean | Prisma.ToolCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["tool"]>
 
@@ -446,7 +446,7 @@ export type ToolSelectScalar = {
 
 export type ToolOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "label" | "value" | "createdAt" | "updatedAt", ExtArgs["result"]["tool"]>
 export type ToolInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  recipes?: boolean | Prisma.Tool$recipesArgs<ExtArgs>
+  recipeTools?: boolean | Prisma.Tool$recipeToolsArgs<ExtArgs>
   _count?: boolean | Prisma.ToolCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ToolIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -455,7 +455,7 @@ export type ToolIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
 export type $ToolPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Tool"
   objects: {
-    recipes: Prisma.$RecipeToolPayload<ExtArgs>[]
+    recipeTools: Prisma.$RecipeToolPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -857,7 +857,7 @@ readonly fields: ToolFieldRefs;
  */
 export interface Prisma__ToolClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  recipes<T extends Prisma.Tool$recipesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tool$recipesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RecipeToolPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  recipeTools<T extends Prisma.Tool$recipeToolsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Tool$recipeToolsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RecipeToolPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1285,9 +1285,9 @@ export type ToolDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
 }
 
 /**
- * Tool.recipes
+ * Tool.recipeTools
  */
-export type Tool$recipesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Tool$recipeToolsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the RecipeTool
    */
